@@ -1,6 +1,5 @@
-
 import React from 'react';
-import { PanelLeft, Volume2, Moon, Sun, Bell, ChevronDown, Zap } from 'lucide-react';
+import { LayoutGrid, Volume2, Moon, Sun, Bell, ChevronDown, ArrowUpCircle } from 'lucide-react';
 
 interface NavbarProps {
   activeTab: string;
@@ -9,53 +8,44 @@ interface NavbarProps {
 }
 
 const Navbar: React.FC<NavbarProps> = ({ activeTab, isDarkMode, toggleDarkMode }) => {
-  const getBreadcrumb = () => {
-    switch(activeTab) {
-      case 'dashboard': return 'Dashboard - Welcome';
-      case 'api': return 'Dashboard - Api';
-      case 'new-collecte': return 'Dashboard - Collections - Create';
-      case 'settings':
-      case 'parametres': return 'Dashboard - Settings';
-      default: return `Dashboard - ${activeTab.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')}`;
-    }
-  };
-
   return (
-    <nav className="h-16 px-8 flex items-center justify-between border-b transition-all duration-300 backdrop-blur-md sticky top-0 z-30"
-      style={{ backgroundColor: 'rgba(var(--bg-surface-rgb), 0.8)', borderColor: 'var(--border-color)' }}>
+    <nav className="h-20 px-10 flex items-center justify-between transition-all duration-300 bg-transparent">
       
-      <div className="flex items-center gap-6">
-        <PanelLeft size={20} className="cursor-pointer opacity-40 hover:opacity-100 transition-opacity" style={{ color: 'var(--text-title)' }} />
-        <div className="flex items-center gap-2 text-[15px] font-medium">
-          <span style={{ color: 'var(--text-title)' }}>{getBreadcrumb()}</span>
+      <div className="flex items-center gap-8">
+        <div className="p-2 bg-white rounded-lg shadow-sm border border-gray-100 cursor-pointer">
+          <LayoutGrid size={18} className="text-gray-600" />
+        </div>
+        <div className="flex items-center gap-2 text-[14px] font-medium">
+          <span className="text-gray-400 hover:text-gray-900 transition-colors border-b border-gray-300 pb-0.5 cursor-pointer">Dashboard</span>
+          <span className="text-gray-300 font-light">-</span>
+          <span className="text-gray-900 font-semibold capitalize">Settings</span>
         </div>
       </div>
 
       <div className="flex items-center gap-6">
-        <button className="flex items-center gap-2 font-bold text-[12px] px-5 py-2 rounded-full border transition-all hover:scale-105"
-          style={{ backgroundColor: 'var(--primary-soft)', borderColor: 'rgba(255, 77, 0, 0.2)', color: 'var(--primary)' }}>
-          <Zap size={14} fill="currentColor" />
+        <button className="flex items-center gap-2 font-bold text-[12px] px-5 py-2 rounded-full border border-gray-100 bg-white text-[#FF4D00] shadow-sm transition-all hover:shadow-md hover:scale-[1.02]">
+          <div className="w-4 h-4 rounded-full bg-orange-50 flex items-center justify-center text-[#FF4D00]">
+            <ArrowUpCircle size={14} fill="currentColor" />
+          </div>
           Upgrade
         </button>
 
-        <div className="flex items-center gap-5" style={{ color: 'var(--text-muted)' }}>
-          <button className="hover:opacity-70 transition-opacity"><Volume2 size={20} /></button>
+        <div className="flex items-center gap-5 text-gray-500">
+          <button className="hover:text-gray-900 transition-colors"><Volume2 size={20} /></button>
           
-          <button onClick={toggleDarkMode} className="hover:opacity-70 transition-opacity">
+          <button onClick={toggleDarkMode} className="hover:text-gray-900 transition-colors">
             {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
           </button>
 
-          <button className="hover:opacity-70 transition-opacity relative">
+          <button className="hover:text-gray-900 transition-colors relative">
             <Bell size={20} />
-            <span className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full border-2" style={{ borderColor: 'var(--bg-surface)' }}></span>
+            <span className="absolute -top-0.5 -right-0.5 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span>
           </button>
         </div>
 
-        <div className="h-4 w-px bg-gray-200 dark:bg-gray-700"></div>
-
-        <div className="flex items-center gap-2 cursor-pointer hover:opacity-70 transition-opacity">
-          <span className="text-[14px] font-semibold" style={{ color: 'var(--text-title)' }}>Français</span>
-          <ChevronDown size={14} style={{ color: 'var(--text-muted)' }} />
+        <div className="flex items-center gap-1.5 cursor-pointer hover:text-gray-900 text-gray-600 transition-colors">
+          <span className="text-[14px] font-semibold">Français</span>
+          <ChevronDown size={14} className="text-gray-400" />
         </div>
       </div>
     </nav>
